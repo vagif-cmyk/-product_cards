@@ -9,7 +9,7 @@ const Form = ({
   filterName,
   setInputValue,
   searchUnsuccessful,
-  setSearchUnsuccessful
+  setSearchUnsuccessful,
 }) => {
   const handleChangeInput = (e) => {
     setSearchUnsuccessful(false);
@@ -41,7 +41,7 @@ const Form = ({
           <input
             className={styles.input}
             value={inputValue}
-            type={"text"}
+            type={filterName === "Цена" ? "number" : "text"}
             placeholder={filterName}
             onChange={handleChangeInput}
           />

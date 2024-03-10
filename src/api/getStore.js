@@ -14,6 +14,40 @@ const names = {
   Бренд: "brand",
 };
 
+export const getIds = async (offset) => {
+  const res = await fetch(baseURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Auth": authString,
+    },
+    body: JSON.stringify({
+      action: "get_ids",
+      params: { offset, limit },
+    }),
+  })
+    .then((data) => data.json())
+    .then((data) => data.result);
+  return res;
+};
+
+export const getItems = async (ids) => {
+  const res = await fetch(baseURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Auth": authString,
+    },
+    body: JSON.stringify({
+      action: "get_items",
+      params: { ids },
+    }),
+  })
+    .then((data) => data.json())
+    .then((data) => data.result);
+  return res;
+};
+
 export const getFilteredItems = async (title, value) => {
   const res = await fetch(baseURL, {
     method: "POST",
@@ -46,40 +80,6 @@ export const getFields = async () => {
     .then((data) => console.log(data))
     .catch((e) => console.log(e));
 };
-export const getItems = async (ids) => {
-  const res = await fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "get_items",
-      params: { ids },
-    }),
-  })
-    .then((data) => data.json())
-    .then((data) => data.result);
-
-  return res;
-};
-
-export const getIds = async (offset) => {
-  const res = await fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "get_ids",
-      params: { offset, limit },
-    }),
-  })
-    .then((data) => data.json())
-    .then((data) => data.result);
-  return res;
-};
 
 export function onError(error, reLoad, setError) {
   if (!reLoad) setError(true);
@@ -100,13 +100,9 @@ export function fillArray(arr, reserve, amount) {
     result.push(arr[i]);
   }
 
-  if (result.length < amount) {
-    let i = 0;
-    while (result.length !== amount) {
-      result.push(reserve[i]);
-      ++i;
-    }
-  } else if (result.length > amount) result.splice(amount);
+  if (result.length < amount)
+    return removeDuplicates([...result, ...reserve], amount);
+  else if (result.length > amount) result.splice(amount);
 
   return result;
 }
