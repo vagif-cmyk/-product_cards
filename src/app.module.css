@@ -1,0 +1,23 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 40px;
+  background-color: #ececec;
+}
+
+.title {
+  font-size: 26px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+}
+

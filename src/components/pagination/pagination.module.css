@@ -1,0 +1,22 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 47%;
+}
+
+.next, .prev {
+  width: 34px;
+  height: 34px;
+}
+
+.prev {
+  transform: rotate(180deg);
+}
+
+.prev:disabled path, .next:disabled path {
+  opacity: 0.3;
+}
+.prev:disabled , .next:disabled  {
+  cursor: no-drop;
+}

@@ -1,0 +1,49 @@
+.formTitle {
+  margin-bottom: 10px;
+}
+
+.controls {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.select {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchBtn {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  transition: opacity .3s ease;
+}
+
+.searchBtn:disabled {
+  opacity: .3;
+}
+
+.input {
+  padding: 8px 34px 8px 8px;
+  border: none;
+  border-radius: 8px;
+}
+.notFound {
+  position: absolute;
+  top: 40px;
+  font-size: 14px;
+  color: rgb(255, 163, 88);
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.show {
+  opacity: 1;
+}

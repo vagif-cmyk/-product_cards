@@ -1,0 +1,17 @@
+.list {
+  display: grid;
+  grid-template-columns: repeat(5, 250px);
+  grid-template-rows: repeat(10, 200px);
+  gap: 30px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.emptyCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: rgb(245 245 245);
+}

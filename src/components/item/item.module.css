@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: rgb(245 245 245);
+}
+
+.id, .price, .brand {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.id {
+  align-items: center;
+}
+
+.price p, .brand p {
+  font-weight: 700;
+}
+
+.cardTitle {
+  text-align: center;
+  font-size: 16px;
+  color: #e56800;
+}
+
+.id span {
+  font-size: 10px;
+}
+
+.id p {
+  font-size: 8px;
+  font-weight: 900;
+}
