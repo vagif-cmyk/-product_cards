@@ -62,7 +62,7 @@ function App() {
         setItems(filledArray);
       } catch (error) {
         console.log(error);
-        handleSubmit(e);
+        // handleSubmit(e);
       } finally {
         setLoading(false);
       }

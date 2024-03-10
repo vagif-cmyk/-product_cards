@@ -57,7 +57,7 @@ export const getFilteredItems = async (title, value) => {
     },
     body: JSON.stringify({
       action: "filter",
-      params: { [names[title]]: isNaN(value) ? value : +value },
+      params: { [names[title]]: names[title] === "price" ? +value : value },
     }),
   })
     .then((res) => res.json())
