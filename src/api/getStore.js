@@ -15,94 +15,94 @@ const names = {
 };
 
 export const getIds = async (offset) => {
-  const res = await fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "get_ids",
-      params: { offset, limit },
-    }),
-  })
-    .then((data) => data.json())
-    .then((data) => data.result);
-  return res;
+  let res;
+  async function fetchData() {
+    return await fetch(baseURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth": authString,
+      },
+      body: JSON.stringify({
+        action: "get_ids",
+        params: { offset, limit },
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => data.result);
+  }
+  try {
+    res = await fetchData();
+    return res;
+  } catch (e) {
+    console.log(e);
+    res = await fetchData();
+    return res;
+  }
 };
 
 export const getItems = async (ids) => {
-  const res = await fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "get_items",
-      params: { ids },
-    }),
-  })
-    .then((data) => data.json())
-    .then((data) => data.result);
-  return res;
+  let res;
+  async function fetchData() {
+    return await fetch(baseURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth": authString,
+      },
+      body: JSON.stringify({
+        action: "get_items",
+        params: { ids },
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => data.result);
+  }
+  try {
+    res = await fetchData();
+    return res;
+  } catch (e) {
+    console.log(e);
+    res = await fetchData();
+    return res;
+  }
 };
 
 export const getFilteredItems = async (title, value) => {
-  const res = await fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "filter",
-      params: { [names[title]]: names[title]==='price'? +value: value },
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => data.result);
-  return res;
-};
-
-export const getFields = async () => {
-  fetch(baseURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-Auth": authString,
-    },
-    body: JSON.stringify({
-      action: "get_fields",
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-    .catch((e) => console.log(e));
-};
-
-export function onError(error, reLoad, setError) {
-  if (!reLoad) setError(true);
-  console.log(error);
-}
-
-export function removeDuplicates(arr, amount) {
-  const table = {};
-  const res = arr
-    .filter(({ id }) => !table[id] && (table[id] = 1))
-    .filter((_, index) => index < amount);
-  return res;
-}
-
-export function fillArray(arr, reserve, amount) {
-  const result = [];
-  for (let i = 0; i < arr.length; i++) {
-    result.push(arr[i]);
+  let res;
+  async function fetchData() {
+    return await fetch(baseURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Auth": authString,
+      },
+      body: JSON.stringify({
+        action: "filter",
+        params: { [names[title]]: names[title] === "price" ? +value : value },
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+      })
+      .then((data) => data.result);
   }
+  try {
+    res = await fetchData();
+    return res;
+  } catch (e) {
+    console.log(e);
+    res = await fetchData();
+    return res;
+  }
+};
 
-  if (result.length < amount)
-    return removeDuplicates([...result, ...reserve], amount);
-  else if (result.length > amount) result.splice(amount);
 
-  return result;
-}
+

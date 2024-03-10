@@ -10,6 +10,7 @@ const Form = ({
   setInputValue,
   searchUnsuccessful,
   setSearchUnsuccessful,
+  loading,
 }) => {
   const handleChangeInput = (e) => {
     setSearchUnsuccessful(false);
@@ -47,7 +48,7 @@ const Form = ({
           />
           <button
             className={styles.searchBtn}
-            disabled={inputValue ? false : true}
+            disabled={!inputValue || loading ? true : false}
           >
             <svg
               width="24px"

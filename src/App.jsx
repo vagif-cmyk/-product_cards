@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import styles from "./app.module.css";
 import ItemsList from "./components/itemsList/ItemsList";
 import {
-  fillArray,
   getFilteredItems,
   getIds,
   getItems,
   numberCards,
-  removeDuplicates,
 } from "./api/getStore";
+import { fillArray, removeDuplicates } from "./helpers";
 import Pagination from "./components/pagination/Pagination";
 import Form from "./components/form/form";
 
@@ -29,12 +28,7 @@ function App() {
       setItems(uniqueItems);
       setLoading(false);
     };
-    try {
-      fetchData();
-    } catch (error) {
-      console.log(error);
-      fetchData();
-    }
+    fetchData();
   }, [offset]);
 
   const handleSelect = (e) => {
@@ -45,26 +39,19 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (inputValue.trim()) {
-      try {
-        setLoading(true);
-        const filteredItems = await getFilteredItems(filterName, inputValue);
-        if (filteredItems.length === 0) {
-          setLoading(false);
-          setSearchUnsuccessful(true);
-          return;
-        }
-        const values = await getItems(filteredItems);
-        const uniqueItems = removeDuplicates(values, 50);
-        const filledArray = fillArray(uniqueItems, items, 50);
-        setItems(filledArray);
-      } catch (error) {
-        console.log(error);
-        handleSubmit(e);
-      } finally {
+      setLoading(true);
+      const filteredItems = await getFilteredItems(filterName, inputValue);
+      if (filteredItems.length === 0) {
         setLoading(false);
+        setSearchUnsuccessful(true);
+        return;
       }
+      const values = await getItems(filteredItems);
+      const uniqueItems = removeDuplicates(values, 50);
+      const filledArray = fillArray(uniqueItems, items, 50);
+      setItems(filledArray);
+      setLoading(false);
     }
   };
 
@@ -86,6 +73,7 @@ function App() {
           setInputValue={setInputValue}
           searchUnsuccessful={searchUnsuccessful}
           setSearchUnsuccessful={setSearchUnsuccessful}
+          loading={loading}
         />
       </div>
       <ItemsList loading={loading} items={items} count={numberCards} />
