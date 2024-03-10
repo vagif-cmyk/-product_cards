@@ -15,8 +15,7 @@ import Form from "./components/form/form";
 function App() {
   const [items, setItems] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [offset, setOffset] = useState(0);
-
+  const [offset, setOffset] = useState(8000);
   const [filterName, setFilterName] = useState("Название");
   const [inputValue, setInputValue] = useState("");
   const [searchUnsuccessful, setSearchUnsuccessful] = useState(false);
@@ -62,7 +61,7 @@ function App() {
         setItems(filledArray);
       } catch (error) {
         console.log(error);
-        // handleSubmit(e);
+        handleSubmit(e);
       } finally {
         setLoading(false);
       }
@@ -73,7 +72,7 @@ function App() {
     <main className={styles.main}>
       <h1 className={styles.title}>Список товаров</h1>
       <div className={styles.header}>
-        <Pagination offset={offset} setOffset={setOffset} items={items} />
+        <Pagination offset={offset} setOffset={setOffset} items={items} loading={loading}/>
         <Form
           handleSubmit={handleSubmit}
           handleSelect={handleSelect}
